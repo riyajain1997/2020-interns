@@ -1,6 +1,8 @@
 const graphContainer = document.getElementById('outerLayer');
+const graphContainer2 = document.getElementById('outerLayer2');
 
 let graphs = '';
+let graphs2 = '';
 
 fetch('./data.json')
     .then(response => {
@@ -17,6 +19,7 @@ fetch('./data.json')
         console.log('>>>>>>>>>InrRate',date);
         const rateObj = result.rates[date];
         const InrRate = rateObj ? rateObj.INR : 0;
+        const GBP = rateObj ? rateObj.GBP :0;
         graphs += `
         <div class="bar-container">
             <div class="bar1-content" style="height: ${InrRate}%" title="${InrRate}">
@@ -24,6 +27,19 @@ fetch('./data.json')
             </div>
         </div>
         `;
+
+        graphs2 += `
+        <div class="bar-container">
+            <div class="bar1-content" style="height: ${InrRate}%" title="${InrRate}">
+                
+            </div>
+            <div class="bar1-content" style="height: ${GBP}%;background-color:red; border:1px solid red ;" title="${GBP}">
+                
+            </div>
+        </div>
+        `;
         graphContainer.innerHTML = graphs;
+        graphContainer2.innerHTML = graphs2;
+
     }
 })
